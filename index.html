@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge, chrome=1">
+  <title>Animate - Showing page elements using CSS - JavaScript plugin</title>
+  <link rel="stylesheet" href="stylesheets/custom.css">
+</head>
+<body>
+  <header class="top wide js-activate slideup">
+    <section class="centered">
+      <div class="animated">
+        <h1>Animate</h1>
+        <p>A JavaScript Plugin</p>
+      </div>
+    </section>
+  </header>
+  <section class="example js-activate fade">
+    <section class="centered">
+      <div class="animated">
+        <p>Show elements as the visitor scrolls</p>
+      </div>
+    </section>
+  </section>
+  <section class="example js-activate slideup staggered">
+    <section class="centered">
+      <ul>
+        <li class="animated">Multiple items</li>
+        <li class="animated">Can be</li>
+        <li class="animated">Staggered</li>
+      </ul>
+    </section>
+  </section>
+  <section class="example js-activate slideup">
+    <section class="centered">
+      <ul>
+        <li class="animated">Or else</li>
+        <li class="animated">Appear</li>
+        <li class="animated">At once</li>
+      </ul>
+    </section>
+  </section>
+  <script src="javascripts/activate.js"></script>
+  <script>
+    // Custom scripting here
+    activate.init();
+  </script>
+</body>
+</html>
