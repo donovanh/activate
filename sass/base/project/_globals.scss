@@ -1,0 +1,42 @@
+
+@include define('project-globals') {
+
+  html, body {
+    font-family: HelveticaNeue, Helvetica, Arial, "Sans-serif";
+    font-size: 20px;
+  }
+
+  h1, p {
+    margin: 0;
+  }
+
+  header, .example {
+    width: 100%;
+    min-height: 20em;
+    text-align: center;
+    position: relative;
+    
+    .centered {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  header {
+    background-color: $colour1;
+  }
+
+  .example {
+    &:nth-child(even) {
+      background-color: $colour2;
+    }
+    &:nth-child(odd) {
+      background-color: $colour3;
+    }
+  }
+
+
+
+}

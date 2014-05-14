@@ -1,0 +1,75 @@
+// A set of animations to introduce on-page elements
+
+.js-animate {
+  .animated {
+    opacity: 0;
+  }
+}
+
+.fade {
+  &.active .animated {
+    animation: fade-in 1s ease-out forwards;
+  }
+  &.inactive .animated {
+    animation: fade-out 0.5s ease-out forwards;
+  }
+}
+
+.slideup {
+  &.active .animated {
+    animation: slideup-in 1s ease-out forwards;
+  }
+  &.inactive .animated {
+    animation: fade-out 0.1s ease-out forwards;
+  }
+}
+
+// Put these into mixins to be called as needed, for efficiency
+// Or else comment them out as needed
+
+// "Fade"
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+// "SlideUp"
+
+@keyframes slideup-in {
+  0% {
+    opacity: 0;
+    transform: translateY(2em);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes slideup-out {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-1em);
+  }
+}
