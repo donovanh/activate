@@ -1,6 +1,6 @@
 {
     "name": "Activate",
-    "version": "0.2.2",
+    "version": "0.2.5",
     "main": "javascripts/activate.js",
     "ignore": [
         "dist",
@@ -17,7 +17,7 @@
         "index.html"
     ],
     "dependencies": {
-        "modernizr": "~2.8.1"
+        "modernizr": ">=2.7.1"
     },
     "devDependencies": {}
 }
