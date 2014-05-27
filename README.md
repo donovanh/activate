@@ -50,7 +50,7 @@ Finally, if you want to use the CSS animations, they can be added to your CSS ap
 
     @import 'activate/stylesheets/animations';
 
-### Raw JavaScript
+### Raw JavaScript/CSS
 
 *Note:* This script requires [Modernizr](http://modernizr.com) to run. This is so that it can detect whether the site is on a touch-enabled device.
 
@@ -59,6 +59,8 @@ Download the [Activate JavaScript file](https://github.com/donovanh/activate/blo
     <script src="/javascripts/activate.js"></script>
 
 The script will automatically detect any `js-animate` class elements on the page and apply the `active` class when they are on-screen.
+
+The animation CSS can be [downloaded here](https://github.com/donovanh/activate/blob/gh-pages/stylesheets/animations.css) and referenced whatever way suits you.
 
 ## Mobile (touch-enabled) devices 
 
