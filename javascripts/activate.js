@@ -103,18 +103,18 @@
     }
   }
 
-  /* start-test-block */
-  activate.test = function() {
-    var exports = {};
-    exports._hasClass = hasClass;
-    exports._addClass = addClass;
-    exports._removeClass = removeClass;
-    exports._checkIfOnScreen = checkIfOnScreen;
-    exports._applyDataAttributes = applyDataAttributes;
-    exports._clearInlineStyles = clearInlineStyles;
-    return exports;
-  }
-  /* end-test-block */
+/* start-test-block */
+activate.test = function() {
+  var exports = {};
+  exports._hasClass = hasClass;
+  exports._addClass = addClass;
+  exports._removeClass = removeClass;
+  exports._checkIfOnScreen = checkIfOnScreen;
+  exports._applyDataAttributes = applyDataAttributes;
+  exports._clearInlineStyles = clearInlineStyles;
+  return exports;
+}
+/* end-test-block */
 
 }(this.activate = this.activate || {}));
 
