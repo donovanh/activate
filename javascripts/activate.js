@@ -8,28 +8,37 @@
 (function(activate){
 
   activate.init = function() {
-    console.log('Activated');
     // Build array of all "js-activate" elements
     elementList = document.getElementsByClassName('js-activate');
-    elementArray = [].slice.call(elementList);
-    checkArray(elementArray);
+    checkArray(elementList);
     if (Modernizr.touch) {
       window.ontouchmove = function (event) {
-        checkArray(elementArray);
+        checkArray(elementList);
       }
     } else {
       scrollTimer = 0;
       lastScrollFireTime = 0;
       window.onscroll = function (event) {
-        throttler(checkArray(elementArray), 100);
+        throttler(checkArray(elementList), 100);
       }
     }
   }
 
   // Private methods
   elementList = '';
-  var checkArray = function(elementArray) {
-    elementArray.forEach(checkIfOnScreen);
+  var checkArray = function(elementList) {
+    elementArray = [].slice.call(elementList);
+    elementArray.forEach(function(element, index, array) {
+      if (checkIfOnScreen(element)) {
+        addClass(elementList[index], 'active');
+        removeClass(elementList[index], 'inactive');
+        applyDataAttributes(element);
+      } else {
+        addClass(elementList[index], 'inactive');
+        removeClass(elementList[index], 'active');
+        clearInlineStyles(element);
+      }
+    });
   }
 
   var applyDataAttributes = function(parentElement) {
@@ -56,16 +65,12 @@
     });
   }
 
-  var checkIfOnScreen = function(element, index, array) {
+  var checkIfOnScreen = function(element) {
     var midpoint = element.offsetTop + (element.offsetHeight / 2);
     if (midpoint >= window.scrollY && midpoint <= (window.scrollY + window.screen.availHeight)) {
-      addClass(elementList[index], 'active');
-      removeClass(elementList[index], 'inactive');
-      applyDataAttributes(element);
+      return true;
     } else {
-      addClass(elementList[index], 'inactive');
-      removeClass(elementList[index], 'active');
-      clearInlineStyles(element);
+      return false;
     }
   }
 
@@ -97,6 +102,19 @@
       }, minScrollTime);
     }
   }
+
+  /* start-test-block */
+  activate.test = function() {
+    var exports = {};
+    exports._hasClass = hasClass;
+    exports._addClass = addClass;
+    exports._removeClass = removeClass;
+    exports._checkIfOnScreen = checkIfOnScreen;
+    exports._applyDataAttributes = applyDataAttributes;
+    exports._clearInlineStyles = clearInlineStyles;
+    return exports;
+  }
+  /* end-test-block */
 
 }(this.activate = this.activate || {}));
 
