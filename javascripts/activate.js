@@ -110,7 +110,6 @@
     exports._addClass = addClass;
     exports._removeClass = removeClass;
     exports._checkIfOnScreen = checkIfOnScreen;
-    exports._applyDataAttributes = applyDataAttributes;
     exports._clearInlineStyles = clearInlineStyles;
     return exports;
   }
