@@ -53,7 +53,9 @@ module.exports = function(grunt) {
         start_comment: 'start-test-block',
         end_comment: 'end-test-block',
       },
-      src: 'dist/*.js'
+      files: {
+        src: 'dist/*.js'
+      }
     }
   });
   grunt.loadNpmTasks('grunt-contrib-sass');
