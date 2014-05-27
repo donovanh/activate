@@ -1,6 +1,6 @@
 {
     "name": "Activate",
-    "version": "0.1",
+    "version": "0.2.0",
     "main": "javascripts/activate.js",
     "ignore": [
         "dist",
