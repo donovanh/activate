@@ -103,7 +103,7 @@
     }
   }
 
-  /* test code */
+  /* start-test-block */
   activate.test = function() {
     var exports = {};
     exports._hasClass = hasClass;
@@ -114,7 +114,7 @@
     exports._clearInlineStyles = clearInlineStyles;
     return exports;
   }
-  /* end-test-code */
+  /* end-test-block */
 
 }(this.activate = this.activate || {}));
 

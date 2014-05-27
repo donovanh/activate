@@ -47,6 +47,13 @@ module.exports = function(grunt) {
         files: 'sass/**/*',
         tasks: ['sass', 'autoprefixer']
       }
+    },
+    strip_code: {
+      options: {
+        start_comment: 'start-test-block',
+        end_comment: 'end-test-block',
+      },
+      src: 'dist/*.js'
     }
   });
   grunt.loadNpmTasks('grunt-contrib-sass');
@@ -55,7 +62,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-gh-pages');
   grunt.loadNpmTasks('grunt-reload');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-strip-code');
 
   grunt.registerTask('default',['reload', 'watch']);
-  grunt.registerTask('deploy',['sass', 'autoprefixer', 'copy', 'gh-pages']);
+  grunt.registerTask('deploy',['sass', 'autoprefixer', 'copy', 'strip_code', 'gh-pages']);
 }
