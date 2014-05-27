@@ -14,9 +14,19 @@ Activate is small (less than 400 bytes), and does not rely on jQuery.
 
 A [live demo on Hop.ie](http://hop.ie/activate) shows how this can look.
 
-## Installing
+## Usage
 
-When installed, Activate will run automatically on each page.
+When installed, Activate will run automatically on each page. It looks for any elements with class `js-activate`. These elements are monitored and if they appear on screen, are given the class `active`.
+
+Optionally, any elements within the `js-activate` element with the class `animated` will be parsed, and any data attributes parsed into inline CSS. This can be useful to control things like animation-delay on a per-element basis.
+
+The HTML might follow this structure:
+
+	<section class="js-activate">
+	  <div class="animated fade-in" data-animation-delay="0.5s" data-animation-timing="0.25s">...</div>
+	</section>
+
+The `animated` elements will have the data-* attributes parsed into inline CSS.
 
 ### Bower
 
@@ -40,7 +50,7 @@ Finally, if you want to use the CSS animations, they can be added to your CSS ap
 
     @import 'activate/stylesheets/animations';
 
-### Raw JavaScript
+### Raw JavaScript/CSS
 
 *Note:* This script requires [Modernizr](http://modernizr.com) to run. This is so that it can detect whether the site is on a touch-enabled device.
 
@@ -50,11 +60,17 @@ Download the [Activate JavaScript file](https://github.com/donovanh/activate/blo
 
 The script will automatically detect any `js-animate` class elements on the page and apply the `active` class when they are on-screen.
 
+The animation CSS can be [downloaded here](https://github.com/donovanh/activate/blob/gh-pages/stylesheets/animations.css) and referenced whatever way suits you.
+
 ## Mobile (touch-enabled) devices 
 
 As the onScroll event is quite unpredictable on touch devices, the `active` class will be applied by default. I'd like to improve this and better support mobile devices soon.
 
 For reference, [the CSS source file is here](https://github.com/donovanh/activate/blob/gh-pages/stylesheets/animations.css).
+
+## Tests
+
+Jasmine tests can be [run online](http://hop.ie/activate/test/).
 
 ## Pull requests
 
