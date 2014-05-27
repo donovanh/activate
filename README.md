@@ -66,6 +66,10 @@ As the onScroll event is quite unpredictable on touch devices, the `active` clas
 
 For reference, [the CSS source file is here](https://github.com/donovanh/activate/blob/gh-pages/stylesheets/animations.css).
 
+## Tests
+
+Jasmine tests can be [run online](http://hop.ie/activate/test/).
+
 ## Pull requests
 
 Pull requests are most welcome. The `master` branch should be cloned and used as the basis of any work, rather than the `gh-pages` branch which is for the public site only.
