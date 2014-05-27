@@ -7,20 +7,21 @@
 
 (function(activate){
 
-  // Public method to initialise the plugin
   activate.init = function() {
+    console.log('Activated');
     // Build array of all "js-activate" elements
     elementList = document.getElementsByClassName('js-activate');
     elementArray = [].slice.call(elementList);
     checkArray(elementArray);
-    // Note: investigate "ontouchmove" alternative for touch devices, using Modernizr to detect touch
     if (Modernizr.touch) {
       window.ontouchmove = function (event) {
         checkArray(elementArray);
       }
     } else {
+      scrollTimer = 0;
+      lastScrollFireTime = 0;
       window.onscroll = function (event) {
-        checkArray(elementArray);
+        throttler(checkArray(elementArray), 100);
       }
     }
   }
@@ -31,29 +32,40 @@
     elementArray.forEach(checkIfOnScreen);
   }
 
-  var staggerAnimatedElements = function(parentElement) {
-    var childers = parentElement.querySelectorAll('.animated');
-    // console.log(childers);
-    childersArray = [].slice.call(childers);
-    var animationDelay = 0;
-    childersArray.forEach(function(childer, index, array) {
-      childer.setAttribute('style', 'animation-delay: ' + animationDelay + 's');
-      childer.setAttribute('style', '-webkit-animation-delay: ' + animationDelay + 's');
-      animationDelay += 0.25;
+  var applyDataAttributes = function(parentElement) {
+    var childrenElementSet = parentElement.querySelectorAll('.animated');
+    childArray = [].slice.call(childrenElementSet);
+    childArray.forEach(function(element, index, array) {
+      var elementStyles = '';
+      for (var i = 0; i < element.attributes.length; i++) {
+        attr = element.attributes[i];
+        if (/^data-/.test(attr.nodeName)) {
+          elementStyles += attr.nodeName.replace(/^data-/, '') + ': ' + attr.nodeValue + '; ';
+          elementStyles += '-webkit-' + attr.nodeName.replace(/^data-/, '') + ': ' + attr.nodeValue + '; ';
+        }
+      }
+      element.setAttribute('style', elementStyles);
+    });
+  }
+
+  var clearInlineStyles = function(parentElement) {
+    var childrenElementSet = parentElement.querySelectorAll('.animated');
+    childArray = [].slice.call(childrenElementSet);
+    childArray.forEach(function(element, index, array) {
+      element.setAttribute('style', '');
     });
   }
 
   var checkIfOnScreen = function(element, index, array) {
-    if (hasClass(element, 'staggered')) {
-      staggerAnimatedElements(element);
-    }
     var midpoint = element.offsetTop + (element.offsetHeight / 2);
     if (midpoint >= window.scrollY && midpoint <= (window.scrollY + window.screen.availHeight)) {
       addClass(elementList[index], 'active');
       removeClass(elementList[index], 'inactive');
+      applyDataAttributes(element);
     } else {
       addClass(elementList[index], 'inactive');
       removeClass(elementList[index], 'active');
+      clearInlineStyles(element);
     }
   }
 
@@ -71,8 +83,25 @@
       ele.className=ele.className.replace(reg,' ').trim();
     }
   }
+  var throttler = function(action, minScrollTime) {
+    var now = new Date().getTime();
+    if (!scrollTimer) {
+      if (now - lastScrollFireTime > (3 * minScrollTime)) {
+          action;   // fire immediately on first scroll
+          lastScrollFireTime = now;
+      }
+      scrollTimer = setTimeout(function() {
+          scrollTimer = null;
+          lastScrollFireTime = new Date().getTime();
+          action;
+      }, minScrollTime);
+    }
+  }
 
 }(this.activate = this.activate || {}));
+
+// Kick it off on load
+window.onload = function() { activate.init(); }
 
 // Modernizr - included to detect "touch-events" support
 /* Modernizr 2.8.1 (Custom Build) | MIT & BSD
