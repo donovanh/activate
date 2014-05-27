@@ -27,7 +27,8 @@ module.exports = function(grunt) {
           {expand: true, src: ['*.html'], dest: 'dist/'},
           {expand: true, src: ['images/**'], dest: 'dist/'},
           {expand: true, src: ['javascripts/**'], dest: 'dist/'},
-          {expand: true, src: ['stylesheets/**'], dest: 'dist/'}
+          {expand: true, src: ['stylesheets/**'], dest: 'dist/'},
+          {expand: true, src: ['bower.json'], dest: 'dist/'}
         ]
       }
     },
