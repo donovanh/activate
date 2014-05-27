@@ -14,9 +14,19 @@ Activate is small (less than 400 bytes), and does not rely on jQuery.
 
 A [live demo on Hop.ie](http://hop.ie/activate) shows how this can look.
 
-## Installing
+## Usage
 
-When installed, Activate will run automatically on each page.
+When installed, Activate will run automatically on each page. It looks for any elements with class `js-activate`. These elements are monitored and if they appear on screen, are given the class `active`.
+
+Optionally, any elements within the `js-activate` element with the class `animated` will be parsed, and any data attributes parsed into inline CSS. This can be useful to control things like animation-delay on a per-element basis.
+
+The HTML might follow this structure:
+
+	<section class="js-activate">
+	  <div class="animated fade-in" data-animation-delay="0.5s" data-animation-timing="0.25s">...</div>
+	</section>
+
+The `animated` elements will have the data-* attributes parsed into inline CSS.
 
 ### Bower
 

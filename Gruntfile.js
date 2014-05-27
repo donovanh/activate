@@ -50,8 +50,8 @@ module.exports = function(grunt) {
     },
     strip_code: {
       options: {
-        start_comment: 'start-test-block',
-        end_comment: 'end-test-block',
+        start_comment: 'test-code',
+        end_comment: 'end-test-code',
       },
       files: {
         src: 'dist/*.js'

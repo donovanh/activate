@@ -1,7 +1,6 @@
 /*
  *  Activate.js
  *  Description: A small JS script to apply an "active" class to any elements marked "js-activate"
- *               It will also "stagger" animated elements (using animation-delay) within the activate section if needed.
  *  Author: Donovan Hutchinson, d@hop.ie
  */
 
@@ -103,18 +102,17 @@
     }
   }
 
-  /* start-test-block */
+  /* test-code */
   activate.test = function() {
     var exports = {};
     exports._hasClass = hasClass;
     exports._addClass = addClass;
     exports._removeClass = removeClass;
     exports._checkIfOnScreen = checkIfOnScreen;
-    exports._applyDataAttributes = applyDataAttributes;
     exports._clearInlineStyles = clearInlineStyles;
     return exports;
   }
-  /* end-test-block */
+  /* end-test-code */
 
 }(this.activate = this.activate || {}));
 
