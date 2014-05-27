@@ -3,9 +3,11 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     sass: {
       dist: {
-        files: {
-          'stylesheets/custom.css' : 'sass/custom.sass'
-        }
+        files:
+          [
+            { 'stylesheets/custom.css' : 'sass/custom.scss' },
+            { 'stylesheets/animations.css' : 'sass/animations.scss' }
+          ]
       }
     },
     reload: {

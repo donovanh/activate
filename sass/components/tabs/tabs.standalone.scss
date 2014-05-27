@@ -1,8 +1,0 @@
-
-@import '_tabs.scss';
-
-#docssaComponent__tabs-dynamicTabs {
-  content: 'loaded';
-}
-
-@include tabs('.dynamicTabs');
