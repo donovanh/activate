@@ -16,6 +16,8 @@
         "README.md",
         "index.html"
     ],
-    "dependencies": {},
+    "dependencies": {
+        "modernizr": "~2.8.1"
+    },
     "devDependencies": {}
 }
