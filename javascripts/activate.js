@@ -9,34 +9,56 @@
   activate.init = function() {
     // Build array of all "js-activate" elements
     elementList = document.getElementsByClassName('js-activate');
-    checkArray(elementList);
-    if (Modernizr.touch) {
-      window.ontouchmove = function (event) {
-        checkArray(elementList);
-      }
-    } else {
-      scrollTimer = 0;
-      lastScrollFireTime = 0;
-      window.onscroll = function (event) {
-        throttler(checkArray(elementList), 100);
+    elementArray = [].slice.call(elementList);
+    if (elementArray.length > 0) {
+      checkArray(elementArray);
+      if (Modernizr.touch) {
+        setInterval(function() {
+          checkArray(elementArray);
+        });
+      } else {
+        scrollTimer = 0;
+        lastScrollFireTime = 0;
+        window.onscroll = function () {
+          throttler(checkArray(elementArray), 100);
+        }
       }
     }
   }
 
   // Private methods
   elementList = '';
-  var checkArray = function(elementList) {
-    elementArray = [].slice.call(elementList);
+  var checkArray = function(elementArray) {
     elementArray.forEach(function(element, index, array) {
+      if (hasClass(element, 'staggered')) {
+        staggerAnimatedElements(element);
+      }
       if (checkIfOnScreen(element)) {
         addClass(elementList[index], 'active');
         removeClass(elementList[index], 'inactive');
         applyDataAttributes(element);
-      } else {
+      } else if (!hasClass(element, 'once')) {
         addClass(elementList[index], 'inactive');
         removeClass(elementList[index], 'active');
         clearInlineStyles(element);
       }
+    });
+  }
+
+  var staggerAnimatedElements = function(parentElement) {
+    if (parentElement.getAttribute('data-initial-delay').length > 0) {
+      var animationDelay = parseFloat(parentElement.getAttribute('data-initial-delay'));
+    } else {
+      var animationDelay = 0;
+    }
+    var childers = parentElement.querySelectorAll('.animated');
+    childersArray = [].slice.call(childers);
+    childersArray.forEach(function(childer, index, array) {
+      var elementStyles = '';
+      elementStyles += 'animation-delay: ' + animationDelay + 's; ';
+      elementStyles += '-webkit-animation-delay: ' + animationDelay + 's; ';
+      childer.setAttribute('style', elementStyles);
+      animationDelay += 0.15;
     });
   }
 
@@ -52,7 +74,9 @@
           elementStyles += '-webkit-' + attr.nodeName.replace(/^data-/, '') + ': ' + attr.nodeValue + '; ';
         }
       }
-      element.setAttribute('style', elementStyles);
+      if (elementStyles.length > 0) {
+        element.setAttribute('style', elementStyles);
+      }
     });
   }
 
@@ -65,12 +89,30 @@
   }
 
   var checkIfOnScreen = function(element) {
-    var midpoint = element.offsetTop + (element.offsetHeight / 2);
-    if (midpoint >= window.scrollY && midpoint <= (window.scrollY + window.screen.availHeight)) {
+    if (hasClass(element, 'onload')) {
       return true;
-    } else {
-      return false;
     }
+    var overlap = element.offsetHeight * 0.2;
+    var topTrigger = window.scrollY + overlap;
+    var bottomTrigger = topTrigger + window.screen.availHeight - overlap;
+    var elementTop = element.offsetTop;
+    var elementBottom = element.offsetTop + element.offsetHeight;
+    console.log(topTrigger, bottomTrigger, elementTop, elementBottom);
+    if (
+      (elementTop < topTrigger) && (elementBottom < topTrigger)
+        ||
+      (elementTop > bottomTrigger) && (elementBottom > bottomTrigger)
+      ) {
+      return false;
+    } else {
+      return true;
+    }
+    // var midpoint = element.offsetTop + (element.offsetHeight / 2);
+    // if (midpoint >= window.scrollY && midpoint <= (window.scrollY + window.screen.availHeight)) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   }
 
   // Helper functions for adding and removing classes, from Openjs.com
