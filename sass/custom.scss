@@ -43,7 +43,7 @@ h1, p {
 
 header, .example {
   width: 100%;
-  min-height: 20em;
+  min-height: 22em;
   text-align: center;
   position: relative;
   
@@ -56,16 +56,25 @@ header, .example {
 }
 
 header {
-  background-color: $colour1;
+  background-color: white;
 }
 
 .example {
-  &:nth-child(even) {
-    background-color: $colour2;
-  }
-  &:nth-child(odd) {
-    background-color: $colour3;
-  }
+  background: white;
+  transition: background ease-out 0.25s;
+  -webkit-transition: background ease-out 0.25s;
+}
+
+.active {
+  background: $colour3;
+  transition: background ease-out 0.25s;
+  -webkit-transition: background ease-out 0.25s;
+}
+
+.inactive {
+  background: $colour2;
+  transition: background ease-out 0.25s;
+  -webkit-transition: background ease-out 0.25s;
 }
 
 

@@ -498,7 +498,7 @@ h1, p {
 
 header, .example {
   width: 100%;
-  min-height: 20em;
+  min-height: 22em;
   text-align: center;
   position: relative; }
   header .centered, .example .centered {
@@ -509,9 +509,19 @@ header, .example {
     transform: translate(-50%, -50%); }
 
 header {
-  background-color: #10b0ff; }
+  background-color: white; }
 
-.example:nth-child(even) {
-  background-color: #e0e0e0; }
-.example:nth-child(odd) {
-  background-color: #f7f7f7; }
+.example {
+  background: white;
+  transition: background ease-out 0.25s;
+  -webkit-transition: background ease-out 0.25s; }
+
+.active {
+  background: #f7f7f7;
+  transition: background ease-out 0.25s;
+  -webkit-transition: background ease-out 0.25s; }
+
+.inactive {
+  background: #e0e0e0;
+  transition: background ease-out 0.25s;
+  -webkit-transition: background ease-out 0.25s; }

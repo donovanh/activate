@@ -46,7 +46,8 @@
   }
 
   var staggerAnimatedElements = function(parentElement) {
-    if (parentElement.getAttribute('data-initial-delay').length > 0) {
+    var initialDelay = parentElement.getAttribute('data-initial-delay');
+    if (initialDelay !== null && initialDelay.length > 0) {
       var animationDelay = parseFloat(parentElement.getAttribute('data-initial-delay'));
     } else {
       var animationDelay = 0;
@@ -92,16 +93,12 @@
     if (hasClass(element, 'onload')) {
       return true;
     }
-    var overlap = element.offsetHeight * 0.2;
+    var overlap = 100;
     var topTrigger = window.scrollY + overlap;
-    var bottomTrigger = topTrigger + window.screen.availHeight - overlap;
+    var bottomTrigger = window.scrollY + window.innerHeight - overlap;
     var elementTop = element.offsetTop;
     var elementBottom = element.offsetTop + element.offsetHeight;
-    if (
-      (elementTop < topTrigger) && (elementBottom < topTrigger)
-        ||
-      (elementTop > bottomTrigger) && (elementBottom > bottomTrigger)
-      ) {
+    if ((elementBottom < topTrigger) || (elementTop > bottomTrigger)) {
       return false;
     } else {
       return true;
@@ -150,6 +147,9 @@
   /* end-test-code */
 
 }(this.activate = this.activate || {}));
+
+// Set the "animated" elements to hidden
+document.write("<style>.cssanimations .animated { opacity: 0;}</style>");
 
 // Kick it off on load
 window.onload = function() { activate.init(); }
