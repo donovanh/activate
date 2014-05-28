@@ -8,7 +8,7 @@ Activate consists of a JavaScript script that looks for any elements containing 
 
 If you set up CSS rules to affect the contents of the `active` elements, these rules will then be triggered as the page is scrolled.
 
-Activate is small (less than 400 bytes), and does not rely on jQuery.
+Activate is small (less than 5Kb), and does not rely on jQuery.
 
 ## Demo
 

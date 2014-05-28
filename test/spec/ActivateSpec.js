@@ -4,19 +4,28 @@ describe("Activate", function() {
 
   beforeEach(function() {
     var containerDiv = document.createElement('div');
+    containerDiv.style.height = 800;
     containerDiv.className = 'js-activate top';
     // Add a child element with class "animated"
     var childDiv = document.createElement('div');
     childDiv.className = 'animated';
     childDiv.setAttribute('data-animation-delay','5s');
+    childDiv.innerHTML = '<p style="height:200px">foo</p>';
     containerDiv.appendChild(childDiv);
+    var paddingDiv = document.createElement('div');
+    paddingDiv.className = 'padding';
+    paddingDiv.innerHTML = '<p style="height:10000px">bar</p>';
     document.body.appendChild(containerDiv);
+    document.body.appendChild(paddingDiv);
     activate.init();
   });
 
   afterEach(function() {
     var containerDiv = document.querySelector(".js-activate");
+    var paddingDiv = document.querySelector(".padding");
     document.body.removeChild(containerDiv);
+    document.body.removeChild(paddingDiv);
+    window.scrollTo(0,0);
   });
 
   it("should add a class", function() {
@@ -46,6 +55,12 @@ describe("Activate", function() {
   it("should test that a div is on-screen", function() {
     var containerDiv = document.querySelector(".js-activate");
     expect(activate.test()._checkIfOnScreen(containerDiv)).toBe(true);
+  });
+
+  it("should test that a div is not on-screen", function() {
+    var containerDiv = document.querySelector(".js-activate");
+    window.scrollTo(0,500);
+    expect(activate.test()._checkIfOnScreen(containerDiv)).toBe(false);
   });
 
   it("should mark a visible div as active", function() {
