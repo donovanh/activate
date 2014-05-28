@@ -97,7 +97,6 @@
     var bottomTrigger = topTrigger + window.screen.availHeight - overlap;
     var elementTop = element.offsetTop;
     var elementBottom = element.offsetTop + element.offsetHeight;
-    console.log(topTrigger, bottomTrigger, elementTop, elementBottom);
     if (
       (elementTop < topTrigger) && (elementBottom < topTrigger)
         ||
@@ -107,12 +106,6 @@
     } else {
       return true;
     }
-    // var midpoint = element.offsetTop + (element.offsetHeight / 2);
-    // if (midpoint >= window.scrollY && midpoint <= (window.scrollY + window.screen.availHeight)) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
   }
 
   // Helper functions for adding and removing classes, from Openjs.com
