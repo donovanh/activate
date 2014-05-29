@@ -152,4 +152,7 @@
 document.write("<style>.cssanimations .animated { opacity: 0;}</style>");
 
 // Kick it off on load
-window.onload = function() { activate.init(); }
+document.addEventListener("DOMContentLoaded", function(event) {
+  activate.init();
+});
+
