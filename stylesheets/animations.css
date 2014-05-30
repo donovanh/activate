@@ -3,20 +3,20 @@
   perspective: 800px;
   transform-type: preserve3d; }
 
-.active .animated.slideup {
+.js-active .animated.slideup {
   -webkit-animation: slideup 0.25s ease-out forwards;
   animation: slideup 0.25s ease-out forwards; }
-.active .animated.slidedown {
+.js-active .animated.slidedown {
   -webkit-animation: slidedown 0.25s ease-out forwards;
   animation: slidedown 0.25s ease-out forwards; }
-.active .animated.fadein {
+.js-active .animated.fadein {
   -webkit-animation: fade-in 0.25s ease-out forwards;
   animation: fade-in 0.25s ease-out forwards; }
-.active .animated.pop {
+.js-active .animated.pop {
   -webkit-animation: pop 0.5s cubic-bezier(0, 0.965, 0.44, 0.96) forwards;
   animation: pop 0.5s cubic-bezier(0, 0.965, 0.44, 0.96) forwards; }
 
-.inactive .animated {
+.js-inactive .animated {
   -webkit-animation: fade-out 0.1s ease-out forwards;
   animation: fade-out 0.1s ease-out forwards; }
 
