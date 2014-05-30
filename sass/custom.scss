@@ -65,13 +65,13 @@ header {
   -webkit-transition: background ease-out 0.25s;
 }
 
-.active {
+.js-active {
   background: $colour3;
   transition: background ease-out 0.25s;
   -webkit-transition: background ease-out 0.25s;
 }
 
-.inactive {
+.js-inactive {
   background: $colour2;
   transition: background ease-out 0.25s;
   -webkit-transition: background ease-out 0.25s;

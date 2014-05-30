@@ -34,12 +34,12 @@
         staggerAnimatedElements(element);
       }
       if (checkIfOnScreen(element)) {
-        addClass(elementList[index], 'active');
-        removeClass(elementList[index], 'inactive');
+        addClass(elementList[index], 'js-active');
+        removeClass(elementList[index], 'js-inactive');
         applyDataAttributes(element);
       } else if (!hasClass(element, 'once')) {
-        addClass(elementList[index], 'inactive');
-        removeClass(elementList[index], 'active');
+        addClass(elementList[index], 'js-inactive');
+        removeClass(elementList[index], 'js-active');
         clearInlineStyles(element);
       }
     });
