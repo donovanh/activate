@@ -16,17 +16,30 @@ A [live demo on Hop.ie](http://hop.ie/activate) shows how this can look.
 
 ## Usage
 
-When installed, Activate will run automatically on each page. It looks for any elements with class `js-activate`. These elements are monitored and if they appear on screen, are given the class `active`.
+When installed, Activate will run automatically on each page. It looks for any elements with class `js-activate`. These elements are monitored and if they appear on screen, are given the class `js-active`.
 
-Optionally, any elements within the `js-activate` element with the class `animated` will be parsed, and any data attributes parsed into inline CSS. This can be useful to control things like animation-delay on a per-element basis.
-
-The HTML might follow this structure:
+Adding and removing the "js-active" class will work on something like this:
 
 	<section class="js-activate">
-	  <div class="animated fade-in" data-animation-delay="0.5s" data-animation-timing="0.25s">...</div>
+	  ...
 	</section>
 
-The `animated` elements will have the data-* attributes parsed into inline CSS.
+### Animating elements
+
+You can attach your own animations and transitions to elements within a "js-active" element if you wish, or else make use of the built-in CSS to easily add pre-defined animations. To use them, add "animated" to any elements you'd like to be animated:
+
+	<section class="js-activate">
+	  <div class="animated fadein" data-animation-delay="0.5s" data-animation-timing="0.25s">...</div>
+	</section>
+
+In this case I've added "fade-in" as the animation type. At the moment this could be any of the following:
+
+* fadein
+* slideup
+* slidedown
+* pop
+
+Along with these classes, you can define some data attributes to control things like animation delay and timing. Any data-* attributes will be parsed into inline CSS.
 
 ### Bower
 
