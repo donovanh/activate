@@ -24,6 +24,20 @@ Adding and removing the "js-active" class will work on something like this:
 	  ...
 	</section>
 
+When the script determines that the element is visible, it adds a js-active class:
+
+	<section class="js-activate js-active">
+	  ...
+	</section>
+
+Then, when the element is scrolled off screen, it updates to js-inactive:
+
+	<section class="js-activate js-inactive">
+	  ...
+	</section>
+
+You can then attach CSS styles and transitions to these active and inactive states as needed.
+
 ### Animating elements
 
 You can attach your own animations and transitions to elements within a "js-active" element if you wish, or else make use of the built-in CSS to easily add pre-defined animations. To use them, add "animated" to any elements you'd like to be animated:
