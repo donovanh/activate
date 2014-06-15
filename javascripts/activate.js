@@ -4,48 +4,49 @@
  *  Author: Donovan Hutchinson, d@hop.ie
  */
 
-(function(activate){
+var activate = new function() {
 
-  activate.init = function() {
+  var a = this;
+  a.elementArray = [];
+
+  a.init = function() {
     // Build array of all "js-activate" elements
     elementList = document.getElementsByClassName('js-activate');
-    elementArray = [].slice.call(elementList);
-    if (elementArray.length > 0) {
-      checkArray(elementArray);
+    a.elementArray = [].slice.call(elementList);
+    if (a.elementArray.length > 0) {
+      a.check();
       if (Modernizr.touch) {
         setInterval(function() {
-          checkArray(elementArray);
+          a.check();
         });
       } else {
         scrollTimer = 0;
         lastScrollFireTime = 0;
         window.onscroll = function () {
-          throttler(checkArray(elementArray), 100);
+          a.throttler(a.check(), 100);
         }
       }
     }
   }
-
-  // Private methods
-  elementList = '';
-  var checkArray = function(elementArray) {
-    elementArray.forEach(function(element, index, array) {
-      if (hasClass(element, 'staggered')) {
-        staggerAnimatedElements(element);
+  
+  a.check = function() {
+    a.elementArray.forEach(function(element, index, array) {
+      if (a.hasClass(element, 'staggered')) {
+        a.staggerAnimatedElements(element);
       }
-      if (checkIfOnScreen(element)) {
-        addClass(elementList[index], 'js-active');
-        removeClass(elementList[index], 'js-inactive');
-        applyDataAttributes(element);
-      } else if (!hasClass(element, 'once')) {
-        addClass(elementList[index], 'js-inactive');
-        removeClass(elementList[index], 'js-active');
-        clearInlineStyles(element);
+      if (a.checkIfOnScreen(element)) {
+        a.addClass(elementList[index], 'js-active');
+        a.removeClass(elementList[index], 'js-inactive');
+        a.applyDataAttributes(element);
+      } else if (!a.hasClass(element, 'once')) {
+        a.addClass(elementList[index], 'js-inactive');
+        a.removeClass(elementList[index], 'js-active');
+        a.clearInlineStyles(element);
       }
     });
   }
 
-  var staggerAnimatedElements = function(parentElement) {
+  this.staggerAnimatedElements = function(parentElement) {
     var initialDelay = parentElement.getAttribute('data-initial-delay');
     if (initialDelay !== null && initialDelay.length > 0) {
       var animationDelay = parseFloat(parentElement.getAttribute('data-initial-delay'));
@@ -63,7 +64,7 @@
     });
   }
 
-  var applyDataAttributes = function(parentElement) {
+  this.applyDataAttributes = function(parentElement) {
     var childrenElementSet = parentElement.querySelectorAll('.animated');
     childArray = [].slice.call(childrenElementSet);
     childArray.forEach(function(element, index, array) {
@@ -81,7 +82,7 @@
     });
   }
 
-  var clearInlineStyles = function(parentElement) {
+  a.clearInlineStyles = function(parentElement) {
     var childrenElementSet = parentElement.querySelectorAll('.animated');
     childArray = [].slice.call(childrenElementSet);
     childArray.forEach(function(element, index, array) {
@@ -89,8 +90,8 @@
     });
   }
 
-  var checkIfOnScreen = function(element) {
-    if (hasClass(element, 'onload')) {
+  a.checkIfOnScreen = function(element) {
+    if (a.hasClass(element, 'onload')) {
       return true;
     }
     var overlap = 100;
@@ -107,19 +108,19 @@
 
   // Helper functions for adding and removing classes, from Openjs.com
   // http://www.openjs.com/scripts/dom/class_manipulation.php
-  var hasClass = function(ele,cls) {
+  a.hasClass = function(ele,cls) {
     return ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
   }
-  var addClass = function(ele,cls) {
-    if (!hasClass(ele,cls)) ele.className += " "+cls;
+  a.addClass = function(ele,cls) {
+    if (!activate.hasClass(ele,cls)) ele.className += " "+cls;
   }
-  var removeClass = function(ele,cls) {
-    if (hasClass(ele,cls)) {
+  a.removeClass = function(ele,cls) {
+    if (activate.hasClass(ele,cls)) {
       var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
       ele.className=ele.className.replace(reg,' ').trim();
     }
   }
-  var throttler = function(action, minScrollTime) {
+  a.throttler = function(action, minScrollTime) {
     var now = new Date().getTime();
     if (!scrollTimer) {
       if (now - lastScrollFireTime > (3 * minScrollTime)) {
@@ -134,19 +135,7 @@
     }
   }
 
-  /* test-code */
-  activate.test = function() {
-    var exports = {};
-    exports._hasClass = hasClass;
-    exports._addClass = addClass;
-    exports._removeClass = removeClass;
-    exports._checkIfOnScreen = checkIfOnScreen;
-    exports._clearInlineStyles = clearInlineStyles;
-    return exports;
-  }
-  /* end-test-code */
-
-}(this.activate = this.activate || {}));
+};
 
 // Set the "animated" elements to hidden
 document.write("<style>.cssanimations .animated { opacity: 0;}</style>");
