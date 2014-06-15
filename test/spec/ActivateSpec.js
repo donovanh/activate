@@ -1,4 +1,4 @@
-// Private tests are exposed via activate.test()._METHODNAME()
+// Private tests are exposed via activate.METHODNAME()
 
 describe("Activate", function() {
 
@@ -30,47 +30,43 @@ describe("Activate", function() {
 
   it("should add a class", function() {
     var containerDiv = document.querySelector(".js-activate");
-    activate.test()._addClass(containerDiv, 'foo');
-    expect(activate.test()._hasClass(containerDiv, 'foo')).not.toBe(null);
+    activate.addClass(containerDiv, 'foo');
+    expect(activate.hasClass(containerDiv, 'foo')).not.toBe(null);
   });
 
   it("should remove a class", function() {
     var containerDiv = document.querySelector(".js-activate");
-    activate.test()._removeClass(containerDiv, 'top');
-    expect(activate.test()._hasClass(containerDiv, 'top')).toBe(null);
+    activate.removeClass(containerDiv, 'top');
+    expect(activate.hasClass(containerDiv, 'top')).toBe(null);
   });
 
   it("should identify that a class in place", function() {
     var foo = document.createElement('div');
     foo.className = 'bar';
-    expect(activate.test()._hasClass(foo, 'bar')).not.toBe(null);
+    expect(activate.hasClass(foo, 'bar')).not.toBe(null);
   });
 
   it("should identify that a class is not in place", function() {
     var foo = document.createElement('div');
     foo.className = 'bar';
-    expect(activate.test()._hasClass(foo, 'boop')).toBe(null);
+    expect(activate.hasClass(foo, 'boop')).toBe(null);
   });
 
   it("should test that a div is on-screen", function() {
     var containerDiv = document.querySelector(".js-activate");
-    expect(activate.test()._checkIfOnScreen(containerDiv)).toBe(true);
+    expect(activate.checkIfOnScreen(containerDiv)).toBe(true);
   });
 
   it("should test that a div is not on-screen", function() {
     var containerDiv = document.querySelector(".js-activate");
     window.scrollTo(0,500);
-    expect(activate.test()._checkIfOnScreen(containerDiv)).toBe(false);
+    expect(activate.checkIfOnScreen(containerDiv)).toBe(false);
   });
 
+  //
   it("should mark a visible div as active", function() {
     var containerDiv = document.querySelector(".js-activate");
-    expect(activate.test()._hasClass(containerDiv, 'active')).not.toBe(null);
-  });
-
-  it("should mark a visible div as active", function() {
-    var containerDiv = document.querySelector(".js-activate");
-    expect(activate.test()._hasClass(containerDiv, 'active')).not.toBe(null);
+    expect(activate.hasClass(containerDiv, 'js-active')).not.toBe(null);
   });
 
   it("should apply data attributes as inline styles", function() {
@@ -80,7 +76,7 @@ describe("Activate", function() {
 
   it("should remove inline styles", function() {
     var containerDiv = document.querySelector(".js-activate");
-    activate.test()._clearInlineStyles(containerDiv);
+    activate.clearInlineStyles(containerDiv);
     var childDiv = document.querySelector(".animated");
     expect(childDiv.getAttribute('style')).toEqual('');
   });
