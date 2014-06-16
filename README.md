@@ -12,7 +12,7 @@ Activate is small (less than 5Kb), and does not rely on jQuery.
 
 ## Demo
 
-A [live demo on Hop.ie](http://hop.ie/activate) shows how this can look.
+A [live demo on Hop.ie](http://hop.ie/activate) shows how this can look. (Note: the demo page is under development, I'll put together something prettier soon)
 
 ## Usage
 
@@ -54,6 +54,38 @@ In this case I've added "fade-in" as the animation type. At the moment this coul
 * pop
 
 Along with these classes, you can define some data attributes to control things like animation delay and timing. Any data-* attributes will be parsed into inline CSS.
+
+### Options
+
+Along with `js-activate`, you can add other classes to define how an area on the page is shown. These are:
+
+* once
+
+The element will be given the `js-active` class once and the class won't be removed. Usage:
+
+	<section class="js-activate once">
+	  ...
+	</section>
+
+* onload
+
+The element will be given the `js-active` class when the page loads and the class won't be removed. Usage:
+
+	<section class="js-activate onload">
+	  ...
+	</section>
+
+* staggered
+
+Any elements within this one with the `animated` class will have a animation delay added. By default this begins at 0 and steps 0.25s per item, but you can override this using `data-initial-delay`, like:
+
+	<section class="js-activate staggered" data-initial-delay="0.5">
+	  <div class="animated pop">...</div>
+	</section>
+
+This would cause the first item to begin it's animation after 0.5 seconds, and the second begin after 0.75 seconds, etc.
+
+## Installing
 
 ### Bower
 
