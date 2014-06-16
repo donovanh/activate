@@ -55,6 +55,36 @@ In this case I've added "fade-in" as the animation type. At the moment this coul
 
 Along with these classes, you can define some data attributes to control things like animation delay and timing. Any data-* attributes will be parsed into inline CSS.
 
+### Options
+
+Along with `js-activate`, you can add other classes to define how an area on the page is shown. These are:
+
+* once
+
+The element will be given the `js-active` class once and the class won't be removed:
+
+	<section class="js-activate once">
+	  ...
+	</section>
+
+* onload
+
+The element will be given the `js-active` class when the page loads and the class won't be removed"
+
+	<section class="js-activate onload">
+	  ...
+	</section>
+
+* staggered
+
+Any elements within this one with the `animated` class will have a animation delay added. By default this begins at 0 and steps 0.25s per item, but you can override this using `data-initial-delay`, like:
+
+	<section class="js-activate staggered" data-initial-delay="0.5">
+	  <div class="animated pop">...</div>
+	</section>
+
+## Installing
+
 ### Bower
 
 The package, including example CSS animations, is available on Bower:
