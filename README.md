@@ -61,7 +61,7 @@ Along with `js-activate`, you can add other classes to define how an area on the
 
 * once
 
-The element will be given the `js-active` class once and the class won't be removed:
+The element will be given the `js-active` class once and the class won't be removed. Usage:
 
 	<section class="js-activate once">
 	  ...
@@ -69,7 +69,7 @@ The element will be given the `js-active` class once and the class won't be remo
 
 * onload
 
-The element will be given the `js-active` class when the page loads and the class won't be removed"
+The element will be given the `js-active` class when the page loads and the class won't be removed. Usage:
 
 	<section class="js-activate onload">
 	  ...
