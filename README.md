@@ -12,7 +12,7 @@ Activate is small (less than 5Kb), and does not rely on jQuery.
 
 ## Demo
 
-A [live demo on Hop.ie](http://hop.ie/activate) shows how this can look.
+A [live demo on Hop.ie](http://hop.ie/activate) shows how this can look. (Note: the demo page is under development, I'll put together something prettier soon)
 
 ## Usage
 
