@@ -83,6 +83,8 @@ Any elements within this one with the `animated` class will have a animation del
 	  <div class="animated pop">...</div>
 	</section>
 
+This would cause the first item to begin it's animation after 0.5 seconds, and the second begin after 0.75 seconds, etc.
+
 ## Installing
 
 ### Bower
