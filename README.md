@@ -38,24 +38,53 @@ Then, when the element is scrolled off screen, it updates to js-inactive:
 
 You can then attach CSS styles and transitions to these active and inactive states as needed.
 
-### Animating elements
+## Animating elements
 
-You can attach your own animations and transitions to elements within a "js-active" element if you wish, or else make use of the built-in CSS to easily add pre-defined animations. To use them, add "animated" to any elements you'd like to be animated:
+You can attach your own animations and transitions to elements within a "js-active" element if you wish, or else make use of the [built-in CSS](https://github.com/donovanh/activate/blob/gh-pages/stylesheets/animations.css) to easily add pre-defined animations. To use them, add "animated" to any elements you'd like to be animated:
 
 	<section class="js-activate">
 	  <div class="animated fadein" data-animation-delay="0.5s" data-animation-timing="0.25s">...</div>
 	</section>
 
-In this case I've added "fade-in" as the animation type. At the moment this could be any of the following:
+In this case I've added "fade-in" as the animation type. At the moment this could be any of the following. Along with these classes, you can define some data attributes to control things like animation delay and timing. Any data-* attributes will be parsed into inline CSS.
 
 * fadein
 * slideup
 * slidedown
 * pop
 
-Along with these classes, you can define some data attributes to control things like animation delay and timing. Any data-* attributes will be parsed into inline CSS.
+### CSS Structure
 
-### Options
+If you want to override any styles, or create your own, you may find the CSS structure useful.
+
+First, attach the needed animation (or transition state) to the `js-active` version of an element:
+
+	.js-active .animated.pop {
+  		-webkit-animation: pop 0.5s cubic-bezier(0, 0.965, 0.44, 0.96) forwards;
+  		animation: pop 0.5s cubic-bezier(0, 0.965, 0.44, 0.96) forwards; }
+
+Then define the animation itself:
+
+	@keyframes pop {
+	  0% {
+	    opacity: 0;
+	    -webkit-transform: translateZ(-60px) scaleY(0.9);
+	    transform: translateZ(-60px) scaleY(0.9); }
+
+	  40% {
+	    opacity: 1; }
+
+	  30% {
+	    opacity: 1;
+	    -webkit-transform: translateZ(40px) scaleY(1.05);
+	    transform: translateZ(40px) scaleY(1.05); }
+
+	  100% {
+	    opacity: 1;
+	    -webkit-transform: translateZ(0);
+	    transform: translateZ(0); } }
+
+## Options
 
 Along with `js-activate`, you can add other classes to define how an area on the page is shown. These are:
 
@@ -117,13 +146,13 @@ Download the [Activate JavaScript file](https://github.com/donovanh/activate/blo
 
     <script src="/javascripts/activate.js"></script>
 
-The script will automatically detect any `js-animate` class elements on the page and apply the `active` class when they are on-screen.
+The script will automatically detect any `js-animate` class elements on the page and apply the `js-active` class when they are on-screen.
 
 The animation CSS can be [downloaded here](https://github.com/donovanh/activate/blob/gh-pages/stylesheets/animations.css) and referenced whatever way suits you.
 
 ## Mobile (touch-enabled) devices 
 
-As the onScroll event is quite unpredictable on touch devices, the `active` class will be applied by default. I'd like to improve this and better support mobile devices soon.
+As the onScroll event is quite unpredictable on touch devices, the `js-active` class will be applied by default. I'd like to improve this and better support mobile devices soon.
 
 For reference, [the CSS source file is here](https://github.com/donovanh/activate/blob/gh-pages/stylesheets/animations.css).
 
