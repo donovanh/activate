@@ -65,7 +65,7 @@ First, attach the needed animation (or transition state) to the `js-active` vers
 
 Then define the animation itself:
 
-	@keyframes pop {
+	@-webkit-keyframes pop {
 	  0% {
 	    opacity: 0;
 	    -webkit-transform: translateZ(-60px) scaleY(0.9);
@@ -83,6 +83,11 @@ Then define the animation itself:
 	    opacity: 1;
 	    -webkit-transform: translateZ(0);
 	    transform: translateZ(0); } }
+
+	@keyframes pop {
+	
+		... etc
+
 
 ## Options
 
