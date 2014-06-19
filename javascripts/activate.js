@@ -30,7 +30,6 @@ var activate = new function() {
   }
   
   a.check = function() {
-    console.log('checking');
     a.elementArray.forEach(function(element, index, array) {
       if (a.hasClass(element, 'staggered')) {
         a.staggerAnimatedElements(element);
