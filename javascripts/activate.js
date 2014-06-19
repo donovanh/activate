@@ -1,52 +1,53 @@
 /*
  *  Activate.js
- *  Description: A small JS script to apply an "active" class to any elements marked "js-activate"
+ *  Description: A small JS script to apply an "js-active" class to any elements marked "js-activate"
  *  Author: Donovan Hutchinson, d@hop.ie
  */
 
 var activate = new function() {
-
+  "use strict";
   var a = this;
+  a.elementList = '';
   a.elementArray = [];
+  a.scrollTimer = null, a.lastScrollFireTime = 0;
 
   a.init = function() {
     // Build array of all "js-activate" elements
-    elementList = document.getElementsByClassName('js-activate');
-    a.elementArray = [].slice.call(elementList);
+    a.elementList = document.getElementsByClassName('js-activate');
+    a.elementArray = [].slice.call(a.elementList);
     if (a.elementArray.length > 0) {
       a.check();
       if (Modernizr.touch) {
         setInterval(function() {
           a.check();
-        });
+        }, 100);
       } else {
-        scrollTimer = 0;
-        lastScrollFireTime = 0;
         window.onscroll = function () {
-          a.throttler(a.check(), 100);
+          a.throttler(a.check, 100);
         }
       }
     }
   }
   
   a.check = function() {
+    console.log('checking');
     a.elementArray.forEach(function(element, index, array) {
       if (a.hasClass(element, 'staggered')) {
         a.staggerAnimatedElements(element);
       }
       if (a.checkIfOnScreen(element)) {
-        a.addClass(elementList[index], 'js-active');
-        a.removeClass(elementList[index], 'js-inactive');
+        a.addClass(a.elementList[index], 'js-active');
+        a.removeClass(a.elementList[index], 'js-inactive');
         a.applyDataAttributes(element);
       } else if (!a.hasClass(element, 'once')) {
-        a.addClass(elementList[index], 'js-inactive');
-        a.removeClass(elementList[index], 'js-active');
+        a.addClass(a.elementList[index], 'js-inactive');
+        a.removeClass(a.elementList[index], 'js-active');
         a.clearInlineStyles(element);
       }
     });
   }
 
-  this.staggerAnimatedElements = function(parentElement) {
+  a.staggerAnimatedElements = function(parentElement) {
     var initialDelay = parentElement.getAttribute('data-initial-delay');
     if (initialDelay !== null && initialDelay.length > 0) {
       var animationDelay = parseFloat(parentElement.getAttribute('data-initial-delay'));
@@ -54,7 +55,7 @@ var activate = new function() {
       var animationDelay = 0;
     }
     var childers = parentElement.querySelectorAll('.animated');
-    childersArray = [].slice.call(childers);
+    var childersArray = [].slice.call(childers);
     childersArray.forEach(function(childer, index, array) {
       var elementStyles = '';
       elementStyles += 'animation-delay: ' + animationDelay + 's; ';
@@ -64,13 +65,13 @@ var activate = new function() {
     });
   }
 
-  this.applyDataAttributes = function(parentElement) {
+  a.applyDataAttributes = function(parentElement) {
     var childrenElementSet = parentElement.querySelectorAll('.animated');
-    childArray = [].slice.call(childrenElementSet);
+    var childArray = [].slice.call(childrenElementSet);
     childArray.forEach(function(element, index, array) {
       var elementStyles = '';
       for (var i = 0; i < element.attributes.length; i++) {
-        attr = element.attributes[i];
+        var attr = element.attributes[i];
         if (/^data-/.test(attr.nodeName)) {
           elementStyles += attr.nodeName.replace(/^data-/, '') + ': ' + attr.nodeValue + '; ';
           elementStyles += '-webkit-' + attr.nodeName.replace(/^data-/, '') + ': ' + attr.nodeValue + '; ';
@@ -84,7 +85,7 @@ var activate = new function() {
 
   a.clearInlineStyles = function(parentElement) {
     var childrenElementSet = parentElement.querySelectorAll('.animated');
-    childArray = [].slice.call(childrenElementSet);
+    var childArray = [].slice.call(childrenElementSet);
     childArray.forEach(function(element, index, array) {
       element.setAttribute('style', '');
     });
@@ -106,7 +107,7 @@ var activate = new function() {
     }
   }
 
-  // Helper functions for adding and removing classes, from Openjs.com
+  // Helpful functions for adding and removing classes, from Openjs.com
   // http://www.openjs.com/scripts/dom/class_manipulation.php
   a.hasClass = function(ele,cls) {
     return ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
@@ -122,16 +123,17 @@ var activate = new function() {
   }
   a.throttler = function(action, minScrollTime) {
     var now = new Date().getTime();
-    if (!scrollTimer) {
-      if (now - lastScrollFireTime > (3 * minScrollTime)) {
-          action;   // fire immediately on first scroll
-          lastScrollFireTime = now;
+    if (!a.scrollTimer) {
+      if (now - a.lastScrollFireTime > (minScrollTime)) {
+        action();
+        a.lastScrollFireTime = now;
+        
+        a.scrollTimer = setTimeout(function() {
+          a.scrollTimer = null;
+          action();
+          a.lastScrollFireTime = new Date().getTime();
+        }, minScrollTime);
       }
-      scrollTimer = setTimeout(function() {
-          scrollTimer = null;
-          lastScrollFireTime = new Date().getTime();
-          action;
-      }, minScrollTime);
     }
   }
 
